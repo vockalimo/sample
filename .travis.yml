@@ -1,0 +1,20 @@
+language: php
+php:
+  - 7.1
+
+env:
+  - APP_DEBUG=false
+
+#install:
+#  - composer install --prefer-dist --optmize-autoloader --quiet
+
+
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database homestead_test;'
+  - composer self-update
+  - composer install --no-interaction
+
+
+
+script: phpunit -c phpunit.xml --coverage-text
